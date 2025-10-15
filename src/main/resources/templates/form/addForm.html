@@ -33,13 +33,23 @@
         </div>
 
         <hr class="my-4">
+
         <!-- single checkbox -->
         <div>판매 여부</div>
         <div>
             <div class="form-check">
-                <input type="checkbox" id="open" name="open" class="form-check-input">
-                <input type="hidden" name="_open" value="on"> <!--name의 _를 붙힌 이름으로 히든태그를 만들면 스프링에서 _open 값만 넘어올때 open의 값이 false라고 인식해서 넣어줌-->
                 <label for="open" class="form-check-label">판매 오픈</label>
+                <input type="checkbox" id="open" th:field="*{open}" class="form-check-input">
+            </div>
+        </div>
+
+        <!-- multi checkbox -->
+        <div>
+            <div>등록 지역</div>
+            <div th:each="region : ${regions}" class="form-check form-check-inline">
+                <input type="checkbox" th:field="*{regions}" th:value="${region.key}" class="form-check-input">
+                <label th:for="${#ids.prev('regions')}"
+                       th:text="${region.value}" class="form-check-label">서울</label>
             </div>
         </div>
 
